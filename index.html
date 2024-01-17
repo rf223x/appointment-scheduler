@@ -6,11 +6,25 @@
     <title>Random GIF Display</title>
     <!-- Include jQuery library -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #gif-wrap {
+            background-size: cover;
+            width: 300px; /* Adjust the width as needed */
+            height: 300px; /* Adjust the height as needed */
+        }
+    </style>
 </head>
 <body>
 
 <!-- GIF Container -->
-<div id="gif-wrap" style="background-size: cover; height: 300px;"></div>
+<div id="gif-wrap"></div>
 
 <!-- GIF Script -->
 <script>
