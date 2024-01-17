@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random GIF Display</title>
+    <title>Random GIF Background</title>
     <!-- Include jQuery library -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
@@ -16,8 +16,14 @@
             background-color: white; /* Set the background color of the webpage */
         }
         #gif-wrap {
-            background-size: contain;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
             background-repeat: no-repeat;
+            z-index: -1; /* Move the background behind the content */
         }
     </style>
 </head>
@@ -72,6 +78,8 @@
         fetchAndRenderGif();
     });
 </script>
+
+<!-- Your page content goes here -->
 
 </body>
 </html>
