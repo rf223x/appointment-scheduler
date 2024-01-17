@@ -3,21 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appointment Scheduler</title>
-    <!-- Add your stylesheets, if any -->
+    <title>Random GIF Display</title>
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
 
-<!-- Calendly inline widget begin -->
-<div class="calendly-inline-widget" data-url="https://calendly.com/eca1/ea?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=26d6e5" style="min-width:320px;height:700px;"></div>
-<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-<!-- Calendly inline widget end -->
-
 <!-- GIF Container -->
 <div id="gif-wrap" style="background-size: cover; height: 300px;"></div>
-
-<!-- Include jQuery library -->
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <!-- GIF Script -->
 <script>
@@ -60,10 +53,8 @@
         });
     };
 
-    // Call fetchAndRenderGif function after an appointment is scheduled
-    // You need to find the appropriate event or hook from Calendly for this trigger
-    // For demonstration purposes, let's assume it's triggered on button click
-    $(".calendly-inline-widget").on("click", function () {
+    // Call fetchAndRenderGif function on page load
+    $(document).ready(function () {
         fetchAndRenderGif();
     });
 </script>
