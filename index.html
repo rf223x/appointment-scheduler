@@ -8,7 +8,7 @@
         const giphy = {
             baseURL: "https://api.giphy.com/v1/gifs/",
             apiKey: "0UTRbFtkMxAplrohufYco5IY74U8hOes",
-            tag: "cat",
+            tag: "awesome",
             type: "random",
             rating: "pg-13"
         };
@@ -56,6 +56,11 @@
         $overlay.click(function() {
             $overlay.hide();
             $popup.hide();
+        });
+
+        // Prevent clicks on the overlay from reaching underlying elements
+        $overlay.on('click', function(event) {
+            event.stopPropagation();
         });
     });
 </script>
