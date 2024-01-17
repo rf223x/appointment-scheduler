@@ -3,86 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random GIF Box</title>
-    <!-- Include jQuery library -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         body {
             margin: 0;
-            background-color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
+            background-color: #f0f0f0;
         }
-        #gif-box {
-            max-width: 300px;
-            max-height: 300px;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+
         #gif-wrap {
-            width: 100%;
-            height: 100%;
+            border: 10px solid white; /* Adjust the border size as needed */
             background-size: contain;
-            background-repeat: no-repeat;
-            z-index: -1;
+            width: 500px; /* Adjust the width as needed */
+            height: 500px; /* Adjust the height as needed */
         }
     </style>
+    <title>GIF Page</title>
 </head>
 <body>
-
-<!-- GIF Box -->
-<div id="gif-box">
     <div id="gif-wrap"></div>
-</div>
 
-<!-- GIF Script -->
-<script>
-    $(document).ready(function () {
-        // Target gif-wrap container
-        const $gif_wrap = $("#gif-wrap");
-
-        // Giphy API defaults
-        const giphy = {
-            baseURL: "https://api.giphy.com/v1/gifs/",
-            apiKey: "0UTRbFtkMxAplrohufYco5IY74U8hOes", // Replace with your Giphy API key
-            tag: "awesome",
-            type: "random",
-            rating: "pg-13"
-        };
-
-        // Function to fetch and render a new GIF
-        const fetchAndRenderGif = () => {
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Giphy API defaults
+            const giphy = {
+                baseURL: "https://api.giphy.com/v1/gifs/",
+                apiKey: "0UTRbFtkMxAplrohufYco5IY74U8hOes",
+                tag: "awesome",
+                type: "random",
+                rating: "pg-13"
+            };
+            // Target gif-wrap container
+            const $gif_wrap = $("#gif-wrap");
             // Giphy API URL
             let giphyURL = encodeURI(
-                `${giphy.baseURL}${giphy.type}?api_key=${giphy.apiKey}&tag=${giphy.tag}&rating=${giphy.rating}`
+                giphy.baseURL +
+                giphy.type +
+                "?api_key=" +
+                giphy.apiKey +
+                "&tag=" +
+                giphy.tag +
+                "&rating=" +
+                giphy.rating
             );
 
             // Call Giphy API and render data
-            $.getJSON(giphyURL)
-                .done(json => renderGif(json.data))
-                .fail((jqXHR, textStatus, errorThrown) => {
-                    console.error("Error fetching GIF:", textStatus, errorThrown);
+            var newGif = () => $.getJSON(giphyURL, json => renderGif(json.data));
+
+            // Display Gif in gif wrap container
+            var renderGif = _giphy => {
+                console.log(_giphy);
+                // Set gif as bg image
+                $gif_wrap.css({
+                    "background-image": 'url("' + _giphy.images.original.url + '")'
                 });
-        };
+            };
 
-        // Display Gif in gif wrap container
-        const renderGif = _giphy => {
-            console.log(_giphy);
-            // Set gif as bg image
-            $gif_wrap.css({
-                "background-image": `url("${_giphy.images.original.url}")`
-            });
-        };
-
-        // Call fetchAndRenderGif function on page load
-        fetchAndRenderGif();
-
-        // Auto-reload every 10 seconds
-        setInterval(fetchAndRenderGif, 10000);
-    });
-</script>
-
+            // Call Giphy API for new gif
+            newGif();
+        });
+    </script>
 </body>
 </html>
